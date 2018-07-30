@@ -1,10 +1,6 @@
 // register the service worker in the root
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js')
-    .then(function (registration) {
-      console.log('Service Worker registration successful with scope: ',
-        registration.scope);
-    })
     .catch(function (err) {
       console.log('Service Worker registration failed: ', err);
     });
@@ -23,6 +19,7 @@ var markers = []
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
+  checkLazyLoader();
 });
 
 /**
@@ -154,13 +151,10 @@ createRestaurantHTML = (restaurant, index) => {
   const li = document.createElement('li');
   const image = document.createElement('img');
   let lazyLoadClass = ""
-  if (index > 4) {
-    lazyLoadClass = " lazyLoad"
-    image.setAttribute('src', DBHelper.loadingImage())
-    image.setAttribute('data-src', DBHelper.imageUrlForRestaurant(restaurant))
-  } else {
-    image.setAttribute('src', DBHelper.imageUrlForRestaurant(restaurant))
-  }
+  lazyLoadClass = " lazyLoad"
+  image.setAttribute('src', DBHelper.loadingImage())
+  image.setAttribute('srcset', DBHelper.loadingImage())
+  image.setAttribute('data-src', DBHelper.imageUrlForRestaurant(restaurant))
   image.className = 'restaurant-img' + lazyLoadClass;
   image.setAttribute('alt', restaurant.alt)
   li.append(image);
@@ -259,7 +253,8 @@ checkLazyLoader = () => {
 }
 loadImg = (imgElem) => {
   imgSrc = imgElem.getAttribute('data-src');
-  imgElem.setAttribute('src', imgSrc);
+  imgElem.setAttribute('src', imgSrc + ".jpg");
+  imgElem.setAttribute('srcset', imgSrc + ".webp");
   imgElem.classList.remove('lazyLoad');
 }
 

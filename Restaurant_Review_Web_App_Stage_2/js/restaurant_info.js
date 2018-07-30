@@ -1,5 +1,14 @@
+// register the service worker in the root
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .catch(function (err) {
+      console.log('Service Worker registration failed: ', err);
+    });
+}
+
 let restaurant;
 var map;
+
 
 /**
  * Initialize Google map, called from HTML.
@@ -56,8 +65,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
-  image.className = 'restaurant-img'
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.setAttribute('src', DBHelper.imageUrlForRestaurant(restaurant) + ".jpg")
+  image.setAttribute('srcset', DBHelper.imageUrlForRestaurant(restaurant) + ".webp")
+  image.className = 'restaurant-img';
   image.setAttribute('alt', restaurant.alt)
 
   const cuisine = document.getElementById('restaurant-cuisine');

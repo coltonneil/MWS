@@ -1,16 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <!-- Normalize.css for better cross-browser consistency -->
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-  <!-- Main CSS file -->
-  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="manifest" href="manifest.json">
   <title>Restaurant Info</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#252831">
 </head>
 
 <body class="inside">
+  <!-- style deferral logic from https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery-->
+  <noscript id="deferred-styles">
+    <link rel="stylesheet" href="css/restaurant.css" type="text/css">
+  </noscript>
+  <script>
+    var loadDeferredStyles = function () {
+      var addStylesNode = document.getElementById("deferred-styles");
+      var replacement = document.createElement("div");
+      replacement.innerHTML = addStylesNode.textContent;
+      document.body.appendChild(replacement)
+      addStylesNode.parentElement.removeChild(addStylesNode);
+    };
+    var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    if (raf) raf(function () {
+      window.setTimeout(loadDeferredStyles, 0);
+    });
+    else window.addEventListener('load', loadDeferredStyles);
+  </script>
   <!-- Beginning header -->
   <header>
     <!-- Beginning nav -->
@@ -72,9 +91,151 @@
   <script type="text/javascript" src="js/dbhelper.js"></script>
   <!-- Main javascript file -->
   <script type="text/javascript" src="js/restaurant_info.js"></script>
+  <script type="application/javascript " charset="utf-8 " src="js/idb.js "></script>
   <!-- Google Maps -->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDD5SRaYutuQrSwkOszBzGgSYRCLnTE380&libraries=places&callback=initMap"></script>
   <!-- End scripts -->
+  <style>
+    @charset "utf-8";
+    html {
+      background-color: #eee
+    }
+
+    body,
+    p,
+    td,
+    th {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      color: #333;
+      line-height: 1.5
+    }
+
+    body {
+      background-color: #fdfdfd;
+      margin: 0;
+      position: relative
+    }
+
+    li,
+    ul {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 1em;
+      color: #333
+    }
+
+    a {
+      color: orange;
+      text-decoration: none
+    }
+
+    a:focus,
+    a:hover {
+      color: #3397db;
+      text-decoration: none
+    }
+
+    a img {
+      border: 0 #fff
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0 0 20px
+    }
+
+    article,
+    aside,
+    canvas,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+      display: block
+    }
+
+    #maincontent {
+      background-color: #eee;
+      min-height: 100%
+    }
+
+    #footer {
+      background-color: #252831;
+      color: #aaa;
+      font-size: 1em;
+      letter-spacing: 1px;
+      padding: 25px;
+      text-align: center;
+      text-transform: uppercase
+    }
+
+    #map,
+    nav {
+      width: 100%
+    }
+
+    nav {
+      text-align: center;
+      background-color: #252831
+    }
+
+    nav h1 {
+      margin: 0;
+      padding: 5px;
+      height: 100%
+    }
+
+    nav h1 a {
+      color: #fff;
+      font-size: .5em;
+      font-weight: 200;
+      letter-spacing: 5px;
+      text-transform: uppercase
+    }
+
+    #map-container {
+      height: 60vh
+    }
+
+    #map {
+      height: 100%;
+      background-color: #ccc
+    }
+
+    @media screen and (min-width: 1440px) {
+      #footer,
+      header {
+        position: fixed;
+        left: 0;
+        right: 0
+      }
+      header {
+        top: 0;
+        z-index: 1;
+        height: 46px
+      }
+      #maincontent {
+        background-color: #eee;
+        min-height: 100%;
+        margin-top: 46px;
+        margin-bottom: 74px
+      }
+      #footer {
+        bottom: 0;
+        height: 24px
+      }
+    }
+  </style>
 
 </body>
 
