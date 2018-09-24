@@ -89,6 +89,7 @@ class DBHelper {
             var reviews = tx.objectStore('reviews');
 
             data.forEach(review => reviews.put(review));
+            tx.complete
           });
           return callback(null, data);
         })
@@ -98,6 +99,17 @@ class DBHelper {
 
     });
   }
+
+  static fetchStoredReviews(id, callback) {
+    DBHelper.checkDB('storedReviews').then(function (data) {
+      // if checkDB returned any data, return that data
+      if (data.length > 0) {
+        data = data.filter(r => r.restaurant_id == id);
+        return callback(null, data);
+      }
+    });
+  }
+
 
 
   /**
@@ -332,12 +344,13 @@ class DBHelper {
     DBHelper.checkDB('storedReviews').then(function (data) {
       dbPromise.then(function (db) {
         if (!db) return db;
-
+        var today = new Date();
         var reviewData = {
           restaurant_id: id,
           name: name,
           rating: rating,
           comments: comments,
+          createdAt: today.toISOString()
         }
 
         var tx = db.transaction('storedReviews', 'readwrite');

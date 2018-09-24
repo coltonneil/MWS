@@ -134,6 +134,14 @@ missingRestaurantHoursHTML = () => {
  * Create all reviews HTML and add them to the webpage.
  */
 fillReviewsHTML = (id = self.restaurant.id) => {
+  DBHelper.fetchStoredReviews(id, (error, reviews) => {
+    const ul = document.getElementById('reviews-list');
+
+    reviews.forEach(review => {
+      ul.appendChild(createReviewHTML(review));
+    });
+  });
+
   DBHelper.fetchReviews(id, (error, reviews) => {
     const container = document.getElementById('reviews-container');
     const title = document.createElement('h2');
