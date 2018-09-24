@@ -1,0 +1,145 @@
+@charset "utf-8";
+/* CSS Document */
+
+html {
+  background-color: #eee;
+}
+
+body,
+td,
+th,
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+}
+
+body {
+  background-color: #fdfdfd;
+  margin: 0;
+  position: relative;
+}
+
+ul,
+li {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  color: #333;
+}
+
+a {
+  color: orange;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #3397db;
+  text-decoration: none;
+}
+
+a img {
+  border: none 0px #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0 0 20px;
+}
+
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+#maincontent {
+  background-color: #eee;
+  min-height: 100%;
+}
+
+#footer {
+  background-color: #252831;
+  color: #aaa;
+  font-size: 1em;
+  letter-spacing: 1px;
+  padding: 25px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* ====================== Navigation ====================== */
+
+nav {
+  width: 100%;
+  background-color: #252831;
+  text-align: center;
+}
+
+nav h1 {
+  margin: 0;
+  padding: 5px;
+  height: 100%;
+}
+
+nav h1 a {
+  color: #fff;
+  font-size: 0.5em;
+  font-weight: 200;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+/* ====================== Map ====================== */
+
+#map-container {
+  height: 60vh;
+  /*width: 100vw;*/
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  background-color: #ccc;
+}
+
+/* extra large device */
+
+@media screen and (min-width: 1440px) {
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 46px;
+    z-index: 1;
+  }
+  #maincontent {
+    background-color: #eee;
+    min-height: 100%;
+    margin-top: 46px;
+    margin-bottom: 74px;
+  }
+  #footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+  }
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Normalize.css for better cross-browser consistency -->
+  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+  <link rel="manifest" href="manifest.json">
+  <title>Restaurant Info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#252831">
+</head>
+
+<body class="inside">
+  <style>
+    .is-hidden {
+      display: none;
+    }
+  </style>
+  <!-- style deferral logic from https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery-->
+  <noscript id="deferred-styles">
+    <link rel="stylesheet" href="css/restaurant.css" type="text/css">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+  </noscript>
+  <script>
+    var loadDeferredStyles = function () {
+      var addStylesNode = document.getElementById("deferred-styles");
+      var replacement = document.createElement("div");
+      replacement.innerHTML = addStylesNode.textContent;
+      document.body.appendChild(replacement)
+      addStylesNode.parentElement.removeChild(addStylesNode);
+    };
+    var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    if (raf) raf(function () {
+      window.setTimeout(loadDeferredStyles, 0);
+    });
+    else window.addEventListener('load', loadDeferredStyles);
+  </script>
+  <!-- Beginning header -->
+  <header>
+    <!-- Beginning nav -->
+    <nav>
+      <h1>
+        <a href="/">Restaurant Reviews</a>
+      </h1>
+    </nav>
+    <!-- Beginning breadcrumb -->
+    <ul id="breadcrumb" role="navigation">
+      <li>
+        <a href="/">Home</a>
+      </li>
+    </ul>
+    <!-- End breadcrumb -->
+    <!-- End nav -->
+  </header>
+  <!-- End header -->
+
+  <!-- Beginning main -->
+  <main id="maincontent">
+    <!-- Beginning map -->
+    <section id="map-container" role="application">
+      <div id="map"></div>
+    </section>
+    <!-- End map -->
+    <!-- Beginning restaurant -->
+    <section id="restaurant-container">
+      <div id="restaurant-info-container">
+        <h2 id="restaurant-name"></h2>
+        <div id="restaurant-img-container">
+          <img id="restaurant-img">
+          <div id="favorite-container">
+            <img id="favorite">
+          </div>
+        </div>
+        <p id="restaurant-cuisine"></p>
+        <p id="restaurant-address"></p>
+      </div>
+      <div id="restaurant-hours-container">
+        <table id="restaurant-hours"></table>
+      </div>
+    </section>
+    <!-- end restaurant -->
+    <!-- Beginning reviews -->
+    <section id="reviews-container">
+      <ul id="reviews-list"></ul>
+    </section>
+    <!-- End reviews -->
+    <div id="add-review-button" aria-label="Click to add a review" style="position: fixed; bottom: 15px;">
+      <img id="add-review-icon" alt="add review" src="img/add_review.svg" onclick="openModal()">
+    </div>
+
+
+  </main>
+  <!-- End main -->
+  <div id="review-modal" class="modal-overlay">
+    <div class="modal">
+      <span class="button-close" onclick="closeModal()">X</span>
+      <form id="review-form" name="review-form">
+        <div class="input-container">
+          <label for="review-name">Name:</label>
+          <input id="review-name" type="text" name="name" />
+        </div>
+        <div class="input-container">
+          <label for="review-rating">Rating:</label>
+          <input id="review-rating" type="number" name="rating" max="5" min="1" />
+        </div>
+        <div id="comment-length">0/1000</div>
+        <div class="input-container">
+          <label id="review-comment-label" for="review-comment">Comment:</label>
+          <textarea id="review-comment" maxlength="1000" oninput="displayCommentLength()" type="textarea" value="Test"></textarea>
+        </div>
+        <div id='submitReview-container'>
+          <button type="button" id="submitReview" onclick="DBHelper.submitReview()">Submit</button>
+        </div>
+        <div id="review-message"></div>
+      </form>
+    </div>
+  </div>
+  <!-- Beginning footer -->
+  <footer id="footer">
+    Copyright (c) 2017
+    <a href="/">
+      <strong>Restaurant Reviews</strong>
+    </a> All Rights Reserved.
+  </footer>
+  <!-- End footer -->
+
+  <!-- Beginning scripts -->
+  <!-- Database helpers -->
+  <script type="application/javascript " charset="utf-8 " src="js/idb.js "></script>
+  <script type="text/javascript" src="js/dbhelper.js"></script>
+  <!-- Main javascript file -->
+  <script type="text/javascript" src="js/restaurant_info.js"></script>
+
+  <!-- Google Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDD5SRaYutuQrSwkOszBzGgSYRCLnTE380&libraries=places&callback=initMap"></script>
+  <!-- End scripts -->
+
+</body>
+
+</html>

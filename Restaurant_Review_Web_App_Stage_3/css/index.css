@@ -1,0 +1,186 @@
+/* ====================== Restaurant Filtering ====================== */
+.filter-options {
+    width: 220px;
+    background-color: #3397DB;
+    align-items: center;
+    right: 0;
+    bottom: 0;
+    height: 180px;
+    position: fixed;
+    transition: all .225s;
+    z-index: 1;
+    display: block;
+}
+
+.filter-options.closed {
+    right: -220px;
+    display: none;
+}
+
+.filter-options.closed:focus {
+    right: 0;
+}
+
+.filter-options h2 {
+    color: white;
+    font-size: 1em;
+    font-weight: normal;
+    line-height: 1;
+    margin: 15px;
+    width: calc(50% - 35px);
+    display: inline-block;
+}
+
+.filter-options select {
+    background-color: white;
+    border: 1px solid #fff;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    height: 35px;
+    letter-spacing: 0;
+    margin: 10px;
+    padding: 0 10px;
+    width: 200px;
+}
+
+#filter-button {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #3397db;
+    box-shadow: 2px 2px 4px 0;
+    z-index: 1;
+}
+
+#filter-button svg {
+    margin: 5px;
+}
+
+#filter-close {
+    -webkit-border-radius: 5;
+    -moz-border-radius: 5;
+    border-radius: 5px;
+    font-family: Arial;
+    color: #333;
+    font-size: 16px;
+    background: #fff;
+    padding: 5px 10px 5px 10px;
+    border: solid #333 1px;
+    text-decoration: none;
+    float: right;
+    margin: 15px;
+}
+
+#filter-close :hover {
+    background: #ddd;
+    text-decoration: none;
+}
+
+/* ====================== Restaurant Listing ====================== */
+#restaurants-list {
+    background-color: #eee;
+    list-style: outside none none;
+    margin: 0 auto;
+    padding: 15px 0;
+    text-align: center;
+    width: calc(90% - 30px);
+}
+
+#restaurants-list li {
+    background-color: #fff;
+    box-shadow: 2px 2px 4px 0;
+    font-family: Arial, sans-serif;
+    margin: 15px 0;
+    padding: 15px;
+    width: calc(100% - 30px);
+    position: relative;
+}
+
+#restaurants-list .restaurant-img {
+    background-color: transparent;
+    display: block;
+    margin: auto;
+    max-width: 100%;
+}
+
+#restaurants-list li h2 {
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 1.2em;
+    font-weight: 100;
+    letter-spacing: 0;
+    line-height: 1.3;
+    margin: 20px 0 10px;
+    text-transform: uppercase;
+}
+
+#restaurants-list p {
+    margin: 0;
+    font-size: 1em;
+}
+
+#restaurants-list li a {
+    background-color: orange;
+    border-bottom: 3px solid #eee;
+    color: #333;
+    display: inline-block;
+    font-size: 1em;
+    margin: 15px 0 0;
+    padding: 8px 30px 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#restaurants-list .is_favorite {
+    position: absolute;
+    width: 48px;
+    right: 0;
+    margin: 15px;
+    bottom: 0;
+    cursor: pointer;
+}
+
+/* small device */
+@media screen and (min-width: 768px) {
+    #restaurants-list li {
+        margin: 15px 15px;
+        padding: 15px;
+        width: calc(50% - 60px);
+        display: inline-block;
+        vertical-align: top;
+    }
+}
+
+/* medium device */
+@media screen and (min-width: 1200px) {
+    #map-container {
+        height: 75vh;
+        width: 100%;
+        display: inline-block;
+    }
+}
+
+/* extra large device */
+@media screen and (min-width: 1440px) {
+    #map-container {
+        width: 40%;
+        height: calc(100vh - (46px + 74px));
+        position: fixed;
+    }
+
+    #restaurants-list-container {
+        margin-left: 41%;
+    }
+
+    #filter-button {
+        bottom: 89px;
+    }
+
+    .filter-options {
+        bottom: 74px;
+    }
+}

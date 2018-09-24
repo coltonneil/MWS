@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+  <link rel="manifest" href="manifest.json">
+  <title>Restaurant Reviews</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#252831">
+</head>
+
+<body>
+  <!-- style deferral logic from https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery-->
+  <noscript id="deferred-styles">
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+  </noscript>
+  <script>
+    var loadDeferredStyles = function () {
+      var addStylesNode = document.getElementById("deferred-styles");
+      var replacement = document.createElement("div");
+      replacement.innerHTML = addStylesNode.textContent;
+      document.body.appendChild(replacement)
+      addStylesNode.parentElement.removeChild(addStylesNode);
+    };
+    var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    if (raf) raf(function () {
+      window.setTimeout(loadDeferredStyles, 0);
+    });
+    else window.addEventListener('load', loadDeferredStyles);
+  </script>
+
+  <header>
+    <nav>
+      <h1>
+        <a href="/">Restaurant Reviews</a>
+      </h1>
+    </nav>
+  </header>
+
+  <main id="maincontent">
+    <section id="map-container" aria-label="Google map of area restaurants" role="application">
+      <div id="map"></div>
+    </section>
+    <section id="restaurants-list-container" aria-label="List of restaurants and filter options">
+      <div id="filter-button" onclick="toggleFilters()" aria-label="Click to open filters">
+        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+          <path fill="#fff" d="M15.44 29.67h7.12V26.1h-7.12zM3 8.33v3.56h32V8.33zm5.33 12.45h21.34v-3.56H8.33z" />
+        </svg>
+      </div>
+      <div class="filter-options closed" aria-label="filters for the list of restaurants">
+        <div id="filter-header">
+          <h2>Filter Results</h2>
+          <button id="filter-close" onclick="toggleFilters()" aria-label="Click to close filters">Close</button>
+        </div>
+        <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()" aria-label="Filter by neighborhood">
+          <option value="all" aria-label="Show all neighborhoods">All Neighborhoods</option>
+        </select>
+        <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()" aria-label="Filter by cuisine">
+          <option value="all" aria-label="Show all cuisines">All Cuisines</option>
+        </select>
+      </div>
+
+      <ul id="restaurants-list" aria-label="List of restaurants"></ul>
+    </section>
+  </main>
+
+  <script type="application/javascript " charset="utf-8 " src="js/dbhelper.js "></script>
+  <script type="application/javascript " charset="utf-8 " src="js/main.js "></script>
+  <script type="application/javascript " charset="utf-8 " src="js/idb.js "></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDD5SRaYutuQrSwkOszBzGgSYRCLnTE380&libraries=places&callback=initMap "></script>
+
+
+  <footer id="footer">
+    Copyright (c) 2017
+    <a href="/ ">
+      <strong>Restaurant Reviews</strong>
+    </a> All Rights Reserved.
+  </footer>
+</body>
+
+</html>
